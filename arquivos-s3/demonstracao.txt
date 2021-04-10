@@ -1,0 +1,48 @@
+Caso de Uso 1: Demonstrar a criptografia transparente dos bancos de dados MySQL
+
+Mostrar o diretório que contém os datafiles:
+sudo ls -lrt /var/lib/mysql
+
+Exibir o conteúdo de um dos arquivos desse diretório o qualquer outro arquivo de um sub-diretório desta pasta
+sudo tail /var/lib/mysql/salesDB/users.MYD
+
+O resultado do comando acima irá mostrar que o conteúdo está criptografado para os usuários.
+Porém o processo do mysql é o único que possui acesso a chave criptográfica a qual protege toda a pasta /var/lib/mysql
+Sendo assim consegue utilizá-los de forma transparente, como se não estivesse criptografado.
+mysql -u root -pguardium
+use salesDB;
+select * from users;
+
+A tabela users contém nome e senha de usuários armazenados em texto claro.
+
+=============================================
+
+Caso de Uso 2: Prevenção contra ataques de Ransomware
+
+O script ransomware.py é um programa em Python muito simples que criptografa arquivos
+O diretório arquivos_muito_importantes_protegidos está protegido e todos os arquivos estão criptografados com apenas acesso do usuário ubuntu
+Qualquer outro usuário não conseguirá nem listar o conteúdo do diretório
+O diretório arquivos_muito_importantes_desprotegidos contém o mesmo arquivo, porém não está protegido pela solução
+A idéia é executar o script me_execute.sh e verificar que ele não conseguirá criptografar o arquivo na pasta protegida
+A execução do processo de criptografia possui privilégios elevados (root).
+
+Mostrar que os dois arquivos são iguais. Porém como vc está executando o comando como usuário que tem permissão o arquivo protegido será apresentado em claro de forma transparente.
+tail -10 arquivos_muito_importantes_protegidos/BACKUP_DB.sql
+diff arquivos_muito_importantes_protegidos/BACKUP_DB.sql arquivos_muito_importantes_desprotegidos/BACKUP_DB.sql
+
+Executar o comando me_execute.sh como usuário root. Não irá funcionar se fizer sudo! Tem que habilitar su para o root:
+sudo passwd root
+
+Criar uma senha para o root. Sugestão: guardium
+
+Mudar para root
+su
+
+Executar o seguinte comando:
+./me_execute.sh
+
+Agora basta mostrar que o arquivo no diretório protegido não foi afetado:
+Voltar para o usuário ubuntu, pois o root não tem permissão de acesso.
+exit
+tail -10 arquivos_muito_importantes_protegidos/BACKUP_DB.sql
+tail -10 arquivos_muito_importantes_desprotegidos/BACKUP_DB.sql
