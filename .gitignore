@@ -6,6 +6,7 @@
 **/scripts/*.old
 **/scripts/*.roadmap
 **/scripts/*.key
+**/scripts/*.txt
 **/scripts/dsm_API_init.sh
 **/arquivos-s3/*.roadmap
 **/apps/*

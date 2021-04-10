@@ -2,7 +2,7 @@
 
 set timeout 20
 
-set cmd [lrange $argv 15 end]
+set cmd [lrange $argv 18 end]
 set continue [lindex $argv 0]
 set license [lindex $argv 1]
 set main [lindex $argv 2]
@@ -17,7 +17,10 @@ set createcluster [lindex $argv 10]
 set username [lindex $argv 11]
 set password [lindex $argv 12]
 set confirmpassword [lindex $argv 13]
-set fim [lindex $argv 14]
+set up3 [lindex $argv 14]
+set system2 [lindex $argv 15]
+set reboot [lindex $argv 16]
+set confirmreboot [lindex $argv 17]
 
 eval spawn $cmd
 expect "Press any key to continue"
@@ -66,6 +69,15 @@ sleep 2
 send "$confirmpassword\r";
 expect "SUCCESS: Creating cluster"
 sleep 2
-send "$fim\r";
+send "$up3\r";
+expect "main>"
+sleep 2
+send "$system2\r";
+expect "system>"
+sleep 2
+send "$reboot\r";
+expect "reboot"
+sleep 2
+send "$confirmreboot\r";
 
 interact
