@@ -55,7 +55,7 @@ Observações:
 
 4) Caso ocorra o seguinte erro durante a execução "Failed to reach target state. Reason: Server.InternalError: Internal error on launch", execute o comando terraform destroy e em seguida terraform apply -auto-approve
 
-5) O processo todo leva em torno de x minutos. A maioria desse tempo é devido a primeira inicialização do DSM, a qual leva uns 20 minutos.
+5) O processo todo leva em torno de 26 minutos. A maioria desse tempo é devido a primeira inicialização do DSM, a qual leva uns 20 minutos.
 
 #CONFIGURAÇÃO DO SERVIDOR DE TOKENIZAÇÃO (CTS):
 User: vtsroot
